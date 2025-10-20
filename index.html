@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Lời chúc 💌</title>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(120deg, #ffdde1, #ee9ca7);
+    text-align: center;
+    padding: 60px 20px;
+    color: #444;
+    overflow: hidden;
+    height: 100vh;
+    position: relative;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .card {
+    background: white;
+    padding: 36px;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    display: inline-block;
+    max-width: 820px;
+    text-align: left;
+    animation: fadeIn 1.2s ease-in-out;
+    position: relative;
+    z-index: 10;
+  }
+
+  h2 {
+    color: #e75480;
+    text-align: center;
+    margin-top: 0;
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  #message p {
+    line-height: 1.75;
+    font-size: 17px;
+    margin-bottom: 12px;
+    text-align: justify;
+    color: #333;
+  }
+
+  .footer {
+    margin-top: 20px;
+    font-style: italic;
+    color: #666;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes glow {
+    from { text-shadow: 0 0 5px #ffb6c1, 0 0 10px #ffb6c1; }
+    to { text-shadow: 0 0 15px #ff69b4, 0 0 25px #ff1493; }
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    90% { opacity: 0.9; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* responsive */
+  @media (max-width: 520px) {
+    .card { padding: 24px; max-width: 92vw; }
+    #message p { font-size: 15px; line-height: 1.6; }
+  }
+</style>
+</head>
+
+<body>
+  <div class="card">
+    <h2>Lời chúc đặc biệt 💐</h2>
+    <div id="message" aria-live="polite"></div>
+    <div class="footer">— Tập thể các bạn nam trong lớp —</div>
+  </div>
+
+<script>
+/*
+  Mã này hiển thị nội dung dài dạng văn/ thơ với hiệu ứng "đánh máy".
+  Nếu muốn vẫn giữ cơ chế ?to=name, có thể thêm trường messages["tên"].
+*/
+
+// Nội dung chính: lời chúc / khúc thơ (đã chuyển thành HTML với các đoạn <p>)
+const poemHtml = `
+  <p>Gió lặng bên hiên, mây lững thững,<br>
+  Thu sang, hương cũ lại ngân xa.</p>
+
+  <p>Ngày vui chẳng nói nhiều hoa mỹ,<br>
+  Chỉ chúc bình an giữa tiết hoa.</p>
+
+  <p>Thương bạn nghĩa đồng, lòng vẫn ấm,<br>
+  Gặp nhau duyên cũ, ý chan hòa.</p>
+
+  <p>Hai mươi tháng Mười – hồn yên tĩnh,<br>
+  Như nắng trong veo đọng giọt trà.</p>
+
+  <p>Hôm nay, ngày 20 tháng 10 là dịp đặc biệt để tôn vinh những người phụ nữ Việt Nam, những người đã và đang làm cho cuộc sống này trở nên dịu dàng, ấm áp và đầy sắc màu hơn.</p>
+
+  <p>Nhân ngày này, tớ muốn gửi đến tất cả các cậu những cô gái tuyệt vời mà tớ có may mắn được quen biết, được đồng hành một lời chúc chân thành nhất.</p>
+
+  <p>Các cậu biết không, giữa những guồng quay bận rộn của học tập, công việc và cuộc sống, đôi khi người ta dễ quên mất rằng, chỉ một nụ cười, một hành động nhỏ của các cậu thôi cũng có thể khiến ngày của ai đó trở nên sáng hơn rất nhiều.</p>
+
+  <p>Tớ thật sự cảm thấy trân trọng khi được làm bạn với những cô gái vừa tinh tế, biết quan tâm, biết cố gắng, và luôn mang lại năng lượng tích cực cho mọi người xung quanh.</p>
+
+  <p>Có thể chính các cậu cũng chưa từng nhận ra, nhưng sự hiện diện của các cậu đã góp phần khiến tớ cảm thấy kỉ niệm ở bên các cậu trở nên đầy sức sống, đầy ấm áp và đáng nhớ hơn.</p>
+
+  <p>20/10 không chỉ là ngày của hoa và quà, mà còn là ngày để nhắc rằng: các cậu xứng đáng được yêu thương, được ghi nhận và được tự hào về chính mình.</p>
+
+  <p>Tớ mong rằng các cậu sẽ luôn giữ được nét đẹp của riêng mình, không chỉ là vẻ bề ngoài rạng rỡ, mà là cả tâm hồn tươi sáng, nhân hậu và kiên cường.</p>
+
+  <p>Cuộc sống chắc chắn sẽ có những lúc khiến ta mệt mỏi, chán nản hay hoang mang. Nhưng tớ tin rằng, các cậu đủ bản lĩnh để đi qua mọi thử thách, đủ mạnh mẽ để đứng dậy sau những lần vấp ngã, và đủ tin tưởng để không đánh mất chính mình.</p>
+
+  <p>Chúc các cậu luôn được là chính mình, không cần phải hoàn hảo, chỉ cần chân thành và sống trọn với những gì các cậu tin là đúng.</p>
+
+  <p>Chúc mỗi sáng thức dậy đều có một lý do để mỉm cười, mỗi ngày trôi qua đều có một niềm vui nhỏ để nhớ lại, và mỗi tối đi ngủ đều cảm thấy an yên trong lòng.</p>
+
+  <p>Chúc các cậu học tập, làm việc thật tốt; luôn giữ vững tinh thần lạc quan và dũng cảm bước về phía trước, dù con đường có đôi khi chẳng dễ dàng.</p>
+
+  <p>Tớ hy vọng rằng, giữa tất cả những áp lực và bận rộn của tuổi trẻ, các cậu vẫn dành được một góc nhỏ để yêu thương bản thân, để nghỉ ngơi, để mơ ước và để sống chậm lại một chút. Vì các cậu xứng đáng được trân trọng, không chỉ trong một ngày đặc biệt, mà là trong từng khoảnh khắc bình thường nhất.</p>
+
+  <p>Nếu một ngày nào đó thấy lòng nặng trĩu, hãy nhớ rằng bên cạnh các cậu còn có tụi tớ, những người bạn luôn sẵn sàng lắng nghe, chia sẻ và đồng hành. Dù không thể giúp giải quyết mọi chuyện, nhưng tụi tớ sẽ luôn ở đây, cùng cười, cùng nói, cùng đi tiếp.</p>
+
+  <p>Chúc mừng ngày 20/10, ngày của những người con gái tuyệt vời.<br>
+  Mong rằng hôm nay, các cậu sẽ thật vui, thật hạnh phúc và nhận được nhiều điều tốt đẹp nhất.<br>
+  Cảm ơn vì đã là chính các cậu, những bông hoa rạng rỡ trong vườn thanh xuân của chúng ta.</p>
+`;
+
+// Hỗ trợ nhiều tin nhắn (nếu muốn có nhiều người), mặc định hiện poemHtml
+const messages = {
+  "default": poemHtml
+};
+
+// Lấy từ URL nếu có ?to=name
+const params = new URLSearchParams(window.location.search);
+const to = params.get("to") || "default";
+
+// Hiệu ứng đánh máy (hỗ trợ HTML tags)
+function typeText(el, html, speed = 22) {
+  el.innerHTML = "";
+  let i = 0;
+  function typing() {
+    if (i < html.length) {
+      if (html[i] === "<") {
+        const end = html.indexOf(">", i);
+        if (end === -1) {
+          // không tìm thấy đóng thẻ, ghi ký tự bình thường
+          el.innerHTML += html[i];
+          i++;
+        } else {
+          // chèn nguyên thẻ (giúp giữ markup như <p>, <br>)
+          el.innerHTML += html.slice(i, end + 1);
+          i = end + 1;
+        }
+      } else {
+        el.innerHTML += html[i];
+        i++;
+      }
+      // điều chỉnh tốc độ cho đoạn dài: khi gặp dấu chấm, phẩy có thể pause lâu hơn
+      let delay = speed;
+      const ch = html[i-1];
+      if (ch === "." || ch === "!" || ch === "?") delay = speed * 8;
+      else if (ch === "," || ch === "—" || ch === "…") delay = speed * 4;
+      setTimeout(typing, delay);
+    }
+  }
+  typing();
+}
+
+// Hiển thị nội dung nếu tồn tại, nếu không hiển thị thông báo lỗi
+const el = document.getElementById("message");
+if (messages[to]) {
+  // 0.6s chờ rồi đánh máy
+  setTimeout(() => typeText(el, messages[to], 22), 600);
+} else {
+  el.innerHTML = "<p>Trang này không tồn tại 💔</p>";
+}
+
+// Hiệu ứng hoa rơi (emoji)
+const numFlowers = 28;
+for (let i = 0; i < numFlowers; i++) {
+  const flower = document.createElement("div");
+  flower.innerHTML = "🌸";
+  Object.assign(flower.style, {
+    position: "fixed",
+    top: (Math.random() * -120) + "px",
+    left: (Math.random() * 100) + "vw",
+    fontSize: (Math.random() * 22 + 14) + "px",
+    opacity: (Math.random() * 0.6 + 0.3).toString(),
+    animation: `fall ${6 + Math.random() * 8}s linear infinite`,
+    animationDelay: (Math.random() * 5) + "s",
+    pointerEvents: "none",
+    transform: `rotate(${Math.random() * 360}deg)`,
+    willChange: "transform, opacity",
+    zIndex: 5
+  });
+  document.body.appendChild(flower);
+}
+</script>
+</body>
+</html>
