@@ -11,8 +11,9 @@
     text-align: center;
     padding: 60px 20px;
     color: #444;
-    overflow: hidden;
-    height: 100vh;
+    /* ❌ bỏ hai dòng gây lỗi cuộn: */
+    /* overflow: hidden;
+       height: 100vh; */
     position: relative;
     -webkit-text-size-adjust: 100%;
   }
@@ -28,6 +29,7 @@
     animation: fadeIn 1.2s ease-in-out;
     position: relative;
     z-index: 10;
+    margin-bottom: 100px; /* ✅ thêm khoảng cách dưới để cuộn thoải mái */
   }
 
   h2 {
@@ -69,12 +71,12 @@
     100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
   }
 
-  /* responsive */
   @media (max-width: 520px) {
     .card { padding: 24px; max-width: 92vw; }
     #message p { font-size: 15px; line-height: 1.6; }
   }
 </style>
+
 </head>
 
 <body>
@@ -204,4 +206,5 @@ for (let i = 0; i < numFlowers; i++) {
 </script>
 </body>
 </html>
+
 
