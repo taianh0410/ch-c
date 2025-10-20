@@ -81,16 +81,12 @@
   <div class="card">
     <h2>Lời chúc đặc biệt 💐</h2>
     <div id="message" aria-live="polite"></div>
-    <div class="footer">— Tập thể các bạn nam trong lớp —</div>
   </div>
 
 <script>
-/*
-  Mã này hiển thị nội dung dài dạng văn/ thơ với hiệu ứng "đánh máy".
-  Nếu muốn vẫn giữ cơ chế ?to=name, có thể thêm trường messages["tên"].
-*/
+ 
 
-// Nội dung chính: lời chúc / khúc thơ (đã chuyển thành HTML với các đoạn <p>)
+ 
 const poemHtml = `
   <p>Gió lặng bên hiên, mây lững thững,<br>
   Thu sang, hương cũ lại ngân xa.</p>
@@ -135,16 +131,16 @@ const poemHtml = `
   Cảm ơn vì đã là chính các cậu, những bông hoa rạng rỡ trong vườn thanh xuân của chúng ta.</p>
 `;
 
-// Hỗ trợ nhiều tin nhắn (nếu muốn có nhiều người), mặc định hiện poemHtml
+ 
 const messages = {
   "default": poemHtml
 };
 
-// Lấy từ URL nếu có ?to=name
+ 
 const params = new URLSearchParams(window.location.search);
 const to = params.get("to") || "default";
 
-// Hiệu ứng đánh máy (hỗ trợ HTML tags)
+ 
 function typeText(el, html, speed = 22) {
   el.innerHTML = "";
   let i = 0;
@@ -153,11 +149,11 @@ function typeText(el, html, speed = 22) {
       if (html[i] === "<") {
         const end = html.indexOf(">", i);
         if (end === -1) {
-          // không tìm thấy đóng thẻ, ghi ký tự bình thường
+        
           el.innerHTML += html[i];
           i++;
         } else {
-          // chèn nguyên thẻ (giúp giữ markup như <p>, <br>)
+    
           el.innerHTML += html.slice(i, end + 1);
           i = end + 1;
         }
@@ -165,7 +161,7 @@ function typeText(el, html, speed = 22) {
         el.innerHTML += html[i];
         i++;
       }
-      // điều chỉnh tốc độ cho đoạn dài: khi gặp dấu chấm, phẩy có thể pause lâu hơn
+ 
       let delay = speed;
       const ch = html[i-1];
       if (ch === "." || ch === "!" || ch === "?") delay = speed * 8;
@@ -176,16 +172,16 @@ function typeText(el, html, speed = 22) {
   typing();
 }
 
-// Hiển thị nội dung nếu tồn tại, nếu không hiển thị thông báo lỗi
+ 
 const el = document.getElementById("message");
 if (messages[to]) {
-  // 0.6s chờ rồi đánh máy
+ 
   setTimeout(() => typeText(el, messages[to], 22), 600);
 } else {
   el.innerHTML = "<p>Trang này không tồn tại 💔</p>";
 }
 
-// Hiệu ứng hoa rơi (emoji)
+ 
 const numFlowers = 28;
 for (let i = 0; i < numFlowers; i++) {
   const flower = document.createElement("div");
@@ -208,3 +204,4 @@ for (let i = 0; i < numFlowers; i++) {
 </script>
 </body>
 </html>
+
